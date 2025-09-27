@@ -15,6 +15,16 @@ CREATE TYPE product_key AS ENUM (
     'DC', 'CC', 'AC', 'IPO', 'PC', 'PENS', 'NS', 'INS', 'BS'
 );
 
+-- blacklist_registry
+CREATE TABLE blacklist_registry (
+    id BIGSERIAL PRIMARY KEY,
+    document_type document_type,
+    document_id VARCHAR(255),
+    blacklisted_at DATE,
+    reason VARCHAR(255),
+    blacklist_expiration_date DATE
+);
+
 
 -- users
 CREATE TABLE users (
@@ -43,7 +53,7 @@ CREATE TABLE clients (
 CREATE TABLE products (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
-    key VARCHAR(20),
+    key product_key,
     create_date TIMESTAMP,
     product_id VARCHAR(255) NOT NULL UNIQUE
 );
