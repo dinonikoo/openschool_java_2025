@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ClientProductResponse {
     private Long id;
     private Long productId;

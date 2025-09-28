@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/client-products")
@@ -19,7 +20,7 @@ public class ClientProductController {
     private final ClientProductRequestMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ClientProduct> createClientProduct(@RequestBody ClientProductRequestDTO dto) {
+    public ResponseEntity<ClientProduct> createClientProduct(@RequestBody ClientProductRequestDTO dto) throws ExecutionException, InterruptedException {
        /* if (dto.getClientId() == null) {
             throw new IllegalArgumentException("clientId must not be null");
         }
