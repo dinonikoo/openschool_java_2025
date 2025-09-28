@@ -5,6 +5,7 @@ import banking.model.ProductKey;
 import banking.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductRepository productRepository;
-
+    @Transactional
     public Product createProduct(Product product) {
         LocalDateTime now = LocalDateTime.now();
         product.setProductId(now.toString());
@@ -37,7 +38,7 @@ public class ProductService {
     public Optional<Product> getProduct(Long id) {
         return productRepository.findById(id);
     }
-
+    @Transactional
     public Product updateProduct(Long id, Product updatedProduct) {
         return productRepository.findById(id).map(product -> {
             product.setName(updatedProduct.getName());
@@ -45,7 +46,7 @@ public class ProductService {
             return productRepository.save(product);
         }).orElseThrow(() -> new RuntimeException("Product not found"));
     }
-
+    @Transactional
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }

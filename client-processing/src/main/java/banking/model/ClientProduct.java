@@ -2,11 +2,16 @@ package banking.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import lombok.Data;
+
+import lombok.*;
 
 @Entity
 @Table(name = "client_products")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClientProduct {
 
     @Id
