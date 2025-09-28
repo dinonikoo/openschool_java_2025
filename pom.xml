@@ -18,9 +18,6 @@
         <module>client-processing</module>
         <module>account-processing</module>
         <module>credit-processing</module>
-        <module>client-processing</module>
-        <module>account-processing</module>
-        <module>credit-processing</module>
     </modules>
 
     <properties>

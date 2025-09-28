@@ -22,6 +22,7 @@ public class Payment {
     private Boolean isCredit;
 
     private LocalDateTime payedAt;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
 }
 

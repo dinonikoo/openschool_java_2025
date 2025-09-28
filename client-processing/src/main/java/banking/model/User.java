@@ -1,9 +1,10 @@
 package banking.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
+@Builder
 @Table(name = "users")
 @Data
 public class User {

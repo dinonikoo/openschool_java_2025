@@ -20,7 +20,8 @@ public class Transaction {
     @JoinColumn(name = "card_id")
     private Card card;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
     private Double amount;
 
     @Enumerated(EnumType.STRING)

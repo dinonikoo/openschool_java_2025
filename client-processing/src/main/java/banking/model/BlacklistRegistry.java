@@ -12,13 +12,16 @@ BlacklistRegistry:
 package banking.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "blacklist_registry")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BlacklistRegistry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

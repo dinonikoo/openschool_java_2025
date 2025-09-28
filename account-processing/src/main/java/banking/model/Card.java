@@ -17,5 +17,6 @@ public class Card {
 
     private String cardId;
     private String paymentSystem;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

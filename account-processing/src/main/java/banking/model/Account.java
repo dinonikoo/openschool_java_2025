@@ -19,5 +19,6 @@ public class Account {
     private Double interestRate;
     private Boolean isRecalc;
     private Boolean cardExist;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

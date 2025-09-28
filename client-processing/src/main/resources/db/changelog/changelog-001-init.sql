@@ -1,24 +1,24 @@
-CREATE TYPE client_product_status AS ENUM (
-    'ACTIVE',
-        'CLOSED',
-        'BLOCKED',
-        'ARRESTED'
-);
+--CREATE TYPE client_product_status AS ENUM (
+--    'ACTIVE',
+--'CLOSED',
+--        'BLOCKED',
+--        'ARRESTED'
+--);
 
-CREATE TYPE document_type AS ENUM (
-    'PASSPORT',
-        'INT_PASSPORT',
-        'BIRTH_CERT'
-);
+--CREATE TYPE document_type AS ENUM (
+--    'PASSPORT',
+--        'INT_PASSPORT',
+--        'BIRTH_CERT'
+--);
 
-CREATE TYPE product_key AS ENUM (
-    'DC', 'CC', 'AC', 'IPO', 'PC', 'PENS', 'NS', 'INS', 'BS'
-);
+--CREATE TYPE product_key AS ENUM (
+--    'DC', 'CC', 'AC', 'IPO', 'PC', 'PENS', 'NS', 'INS', 'BS'
+--);
 
 -- blacklist_registry
 CREATE TABLE blacklist_registry (
     id BIGSERIAL PRIMARY KEY,
-    document_type document_type,
+    document_type VARCHAR(50),
     document_id VARCHAR(255),
     blacklisted_at DATE,
     reason VARCHAR(255),
@@ -27,6 +27,12 @@ CREATE TABLE blacklist_registry (
 
 
 -- users
+CREATE TABLE client_sequence (
+    region_code VARCHAR(2) PRIMARY KEY,
+    branch_code VARCHAR(2) NOT NULL,
+    last_number BIGINT
+);
+
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
     login VARCHAR(255) NOT NULL UNIQUE,
@@ -43,7 +49,7 @@ CREATE TABLE clients (
     middle_name VARCHAR(255),
     last_name VARCHAR(255),
     date_of_birth DATE,
-    document_type document_type,
+    document_type VARCHAR(50),
     document_id VARCHAR(255),
     document_prefix VARCHAR(50),
     document_suffix VARCHAR(50)
@@ -53,7 +59,7 @@ CREATE TABLE clients (
 CREATE TABLE products (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
-    key product_key,
+    key VARCHAR(5),
     create_date TIMESTAMP,
     product_id VARCHAR(255) NOT NULL UNIQUE
 );
@@ -65,5 +71,5 @@ CREATE TABLE client_products (
     product_id BIGINT REFERENCES products(id),
     open_date TIMESTAMP,
     close_date TIMESTAMP,
-    status client_product_status
+    status VARCHAR(50)
 );

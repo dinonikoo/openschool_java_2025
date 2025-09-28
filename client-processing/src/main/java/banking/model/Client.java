@@ -1,19 +1,25 @@
 package banking.model;
 
+import banking.model.DocumentType;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "clients")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Client {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "client_id", unique = true)
     private String clientId;
 
     @ManyToOne
@@ -26,6 +32,7 @@ public class Client {
     private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "document_type", columnDefinition = "document_type")
     private DocumentType documentType;
 
     private String documentId;
