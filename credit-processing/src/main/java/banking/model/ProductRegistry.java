@@ -17,5 +17,5 @@ public class ProductRegistry {
     private Long productId;
     private Double interestRate;
     private LocalDate openDate;
-
+    private Integer monthCount;
 }

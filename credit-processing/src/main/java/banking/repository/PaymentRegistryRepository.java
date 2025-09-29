@@ -2,7 +2,11 @@ package banking.repository;
 
 import banking.model.PaymentRegistry;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface PaymentRegistryRepository extends JpaRepository<PaymentRegistry, Long> {
+    List<PaymentRegistry> findByProductRegistryClientId(Long clientId);
+    boolean existsByProductRegistryClientIdAndExpiredTrue(Long clientId);
 }

@@ -2,6 +2,7 @@ package banking.controller;
 
 import banking.model.User;
 import banking.model.Client;
+import banking.model.dto.ClientInfoDTO;
 import banking.model.dto.ClientRegistrationDTO;
 import banking.service.ClientService;
 import banking.utils.ClientRegistrationMapper;
@@ -27,4 +28,17 @@ public class ClientController {
         Client savedClient = clientService.registerClient(regionCode, branchCode, user, client);
         return mapper.toDto(savedClient);
     }
+
+    @GetMapping("/{id}")
+    public ClientInfoDTO getClientInfo(@PathVariable Long id) {
+        Client client = clientService.findById(id);
+        ClientInfoDTO dto = new ClientInfoDTO();
+        dto.setFirstName(client.getFirstName());
+        dto.setMiddleName(client.getMiddleName());
+        dto.setLastName(client.getLastName());
+        dto.setDocumentType(client.getDocumentType().name());
+        dto.setDocumentId(client.getDocumentId());
+        return dto;
+    }
+
 }

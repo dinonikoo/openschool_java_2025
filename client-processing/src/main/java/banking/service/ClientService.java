@@ -59,4 +59,10 @@ public class ClientService {
 
         return String.format("%s%s%08d", region, branch, nextNumber);
     }
+
+    public Client findById(Long id) {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found: " + id));
+    }
+
 }
