@@ -16,9 +16,9 @@ public class AccountService {
 
     @KafkaListener(
             topics = "client_products",
-            groupId = "account-service",
             containerFactory = "clientKafkaListenerContainerFactory",
-            properties = {"spring.json.value.default.type=banking.model.dto.ClientProductResponse"}
+            groupId = "account-group"//,
+            //properties = {"spring.json.value.default.type=banking.model.dto.ClientProductResponse"}
     )
     public void handleClientProduct(ClientProductResponse event) {
         System.out.println("Got message from ClientProduct: " + event);

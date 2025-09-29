@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
-    @KafkaListener(topics = "client_transactions", groupId = "transaction-service")
+    @KafkaListener(topics = "client_transactions", groupId = "transaction-group")
     public void consume(String message) {
         // just print
         //System.out.println("Message: " + message);

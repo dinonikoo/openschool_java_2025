@@ -21,9 +21,9 @@ public class CardService {
 
     @KafkaListener(
             topics = "client_cards",
-            groupId = "card-service",
             containerFactory = "cardKafkaListenerContainerFactory",
-            properties = {"spring.json.value.default.type=banking.model.dto.CardCreateRequest"}
+            groupId = "card-group" //,
+     //       properties = {"spring.json.value.default.type=banking.model.dto.CardCreateRequest"}
     )
     public void handleCardCreate(CardCreateRequest request) {
         System.out.println("Message, create card: " + request);
@@ -43,7 +43,7 @@ public class CardService {
         card.setCardId(generateUniqueCardNumber());
         card.setPaymentSystem(request.getPaymentSystem());
         card.setStatus(account.getStatus());
-
+        account.setCardExist(Boolean.TRUE);
         cardRepository.save(card);
         System.out.println("Card for account " + account.getId() + ", created, cardId: " + card.getCardId());
     }

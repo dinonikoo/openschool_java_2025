@@ -1,6 +1,4 @@
 spring:
-  server:
-    port: 8081
   datasource:
     url: jdbc:postgresql://localhost:5432/accountdb
     username: client_user
@@ -12,3 +10,5 @@ spring:
     show-sql: true
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
+server:
+  port: 8081
