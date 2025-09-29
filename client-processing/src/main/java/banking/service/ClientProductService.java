@@ -23,7 +23,7 @@ public class ClientProductService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Transactional
-    public ClientProduct createClientProduct(ClientProduct clientProduct) throws ExecutionException, InterruptedException {
+    public ClientProduct createClientProduct(ClientProduct clientProduct, Double creditAmount, Integer monthCount, Double annualRate) throws ExecutionException, InterruptedException {
         clientProduct.setOpenDate(LocalDateTime.now());
         ClientProduct saved = clientProductRepository.save(clientProduct);
 
@@ -33,7 +33,10 @@ public class ClientProductService {
                 saved.getClient().getId(),
                 String.valueOf(saved.getProduct().getKey()),
                 String.valueOf(saved.getStatus()),
-                saved.getOpenDate()
+                saved.getOpenDate(),
+                creditAmount,
+                monthCount,
+                annualRate
         );
 
         String topic = switch (clientProduct.getProduct().getKey()) {

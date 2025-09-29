@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientProductResponse {
+public class CreditRequestDTO {
     private Long id;
     private Long productId;
     private Long clientId;

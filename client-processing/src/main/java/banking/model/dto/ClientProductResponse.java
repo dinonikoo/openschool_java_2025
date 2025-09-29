@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ClientProductResponse {
     private Long id;
     private Long productId;
@@ -15,4 +16,8 @@ public class ClientProductResponse {
     private String productKey;
     private String status;
     private LocalDateTime openDate;
+
+    private Double creditAmount;
+    private Integer monthCount;
+    private Double annualRate;
 }

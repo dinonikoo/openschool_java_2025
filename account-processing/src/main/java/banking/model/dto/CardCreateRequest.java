@@ -21,6 +21,6 @@ public class CardCreateRequest {
     @JsonProperty("payment_system")
     private String paymentSystem;
 
-    @JsonProperty("status")
-    private String status;
+    //@JsonProperty("status")
+    //private String status;
 }

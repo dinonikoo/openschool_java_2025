@@ -21,4 +21,13 @@ public class ClientProductRequestDTO {
 
     @JsonProperty("status")
     private String status;
+
+    @JsonProperty("credit_amount")
+    private Double creditAmount;
+
+    @JsonProperty("month_count")
+    private Integer monthCount;
+
+    @JsonProperty("annual_rate")
+    private Double annualRate;
 }

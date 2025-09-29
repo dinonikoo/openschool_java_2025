@@ -28,7 +28,7 @@ public class ClientProductController {
             throw new IllegalArgumentException("productId must not be null");
         }*/
 
-        return ResponseEntity.ok(clientProductService.createClientProduct(mapper.toEntity(dto)));
+        return ResponseEntity.ok(clientProductService.createClientProduct(mapper.toEntity(dto), dto.getCreditAmount(), dto.getMonthCount(), dto.getAnnualRate()));
     }
 
     @GetMapping

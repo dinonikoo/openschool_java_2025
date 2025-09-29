@@ -28,21 +28,21 @@ public class CardService {
     public void handleCardCreate(CardCreateRequest request) {
         System.out.println("Message, create card: " + request);
 
-        String status = request.getStatus();
+        Account account = accountRepository.findById(request.getAccount_id())
+                .orElseThrow(() -> new RuntimeException("Account not found: " + request.getAccount_id()));
+
+        String status = String.valueOf(account.getStatus());
         if ("CLOSED".equalsIgnoreCase(status) ||
                 "FROZEN".equalsIgnoreCase(status) ||
                 "ARRESTED".equalsIgnoreCase(status)) {
             throw new IllegalStateException("Can't create card with status: " + status);
         }
 
-        Account account = accountRepository.findById(request.getAccount_id())
-                .orElseThrow(() -> new RuntimeException("Account not found: " + request.getAccount_id()));
-
         Card card = new Card();
         card.setAccount(account);
         card.setCardId(generateUniqueCardNumber());
         card.setPaymentSystem(request.getPaymentSystem());
-        card.setStatus(Status.valueOf(request.getStatus()));
+        card.setStatus(account.getStatus());
 
         cardRepository.save(card);
         System.out.println("Card for account " + account.getId() + ", created, cardId: " + card.getCardId());
