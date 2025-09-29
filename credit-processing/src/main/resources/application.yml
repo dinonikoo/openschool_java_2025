@@ -11,6 +11,7 @@ spring:
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
-
+server:
+  port: 8081
 credit:
   limit: 2000000
