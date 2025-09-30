@@ -43,7 +43,6 @@ public class CreditProductListener {
         List<PaymentRegistry> pendingPayments = paymentRegistryRepository
                 .findByProductIdAndPaymentDateIsNull(product.getId());
 
-        // 3. Отмечаем их как оплаченные
         LocalDateTime now = LocalDateTime.now();
         for (PaymentRegistry p : pendingPayments) {
             p.setPaymendDate(LocalDate.from(now));
