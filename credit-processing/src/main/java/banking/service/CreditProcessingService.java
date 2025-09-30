@@ -34,14 +34,12 @@ public class CreditProcessingService {
         Double currentDebt = sumDebtByClientId(dto.getClientId());
         if (currentDebt + dto.getCreditAmount() > creditLimit) {
             dto.setStatus("CLOSED");
-            //todo: сделать чтоб менялись статусы в других мс
             return;
         }
 
         boolean hasExpired = paymentRegistryRepository.existsByProductRegistryClientIdAndExpiredTrue(dto.getClientId());
         if (hasExpired) {
             dto.setStatus("CLOSED");
-            //todo: сделать чтоб менялись статусы в других мс
             return;
         }
 

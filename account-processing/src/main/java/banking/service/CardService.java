@@ -9,6 +9,7 @@ import banking.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -25,6 +26,8 @@ public class CardService {
             groupId = "card-group" //,
      //       properties = {"spring.json.value.default.type=banking.model.dto.CardCreateRequest"}
     )
+
+    @Transactional
     public void handleCardCreate(CardCreateRequest request) {
         System.out.println("Message, create card: " + request);
 

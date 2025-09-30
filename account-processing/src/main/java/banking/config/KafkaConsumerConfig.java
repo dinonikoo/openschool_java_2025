@@ -2,6 +2,8 @@ package banking.config;
 
 import banking.model.dto.CardCreateRequest;
 import banking.model.dto.ClientProductResponse;
+import banking.model.dto.PaymentDTO;
+import banking.model.dto.TransactionDTO;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -47,6 +49,26 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
+    public ConsumerFactory<String, TransactionDTO> transactionConsumerFactory() {
+        JsonDeserializer<TransactionDTO> deserializer =
+                new JsonDeserializer<>(TransactionDTO.class, false);
+        deserializer.addTrustedPackages("banking.model.dto");
+
+        return new DefaultKafkaConsumerFactory<>(
+                baseConsumerConfig(), new StringDeserializer(), deserializer);
+    }
+
+    @Bean
+    public ConsumerFactory<String, PaymentDTO> paymentConsumerFactory() {
+        JsonDeserializer<PaymentDTO> deserializer =
+                new JsonDeserializer<>(PaymentDTO.class, false);
+        deserializer.addTrustedPackages("banking.model.dto");
+
+        return new DefaultKafkaConsumerFactory<>(
+                baseConsumerConfig(), new StringDeserializer(), deserializer);
+    }
+
+    @Bean
     public ConcurrentKafkaListenerContainerFactory<String, CardCreateRequest> cardKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, CardCreateRequest> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
@@ -59,6 +81,22 @@ public class KafkaConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<String, ClientProductResponse> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(clientConsumerFactory());
+        return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, TransactionDTO> transactionKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, TransactionDTO> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(transactionConsumerFactory());
+        return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, PaymentDTO> paymentKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, PaymentDTO> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(paymentConsumerFactory());
         return factory;
     }
 }
