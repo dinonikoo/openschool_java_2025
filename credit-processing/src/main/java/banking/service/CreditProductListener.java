@@ -56,9 +56,8 @@ public class CreditProductListener {
         try {
             String[] parts = message.split(":");
             return Long.parseLong(parts[1].trim());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+         } catch (NumberFormatException e) {
+        return null;
         }
     }
 }
